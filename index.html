@@ -1,0 +1,20 @@
+<form id="uploadForm">
+  <input type="file" id="ipaFile" name="ipa" accept=".ipa" />
+  <button type="submit">Upload and Install</button>
+</form>
+
+<script>
+  document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('ipa', document.getElementById('ipaFile').files[0]);
+
+    fetch('/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => alert('App installed successfully!'))
+    .catch(error => alert('Error installing app.'));
+  });
+</script>
