@@ -1,20 +1,18 @@
-<form id="uploadForm">
-  <input type="file" id="ipaFile" name="ipa" accept=".ipa" />
-  <button type="submit">Upload and Install</button>
-</form>
-
-<script>
-  document.getElementById('uploadForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('ipa', document.getElementById('ipaFile').files[0]);
-
-    fetch('/upload', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.text())
-    .then(data => alert('App installed successfully!'))
-    .catch(error => alert('Error installing app.'));
-  });
-</script>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Install My App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Arial; padding: 2rem; }
+    .btn { display:inline-block; padding: 12px 18px; border-radius: 8px; background:#007AFF; color:white; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <h1>Install My App</h1>
+  <p>Tap the button below in Safari on your iPhone/iPad to install.</p>
+  <a class="btn" href="itms-services://?action=download-manifest&url=https://your.server.com/path/manifest.plist">Install My App</a>
+  <p style="font-size:0.9em;color:#666;">If installation fails: ensure the device is allowed by the provisioning profile or you have a valid enterprise cert, and your server uses HTTPS with a valid cert.</p>
+</body>
+</html>
